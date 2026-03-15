@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <ncurses/ncurses.h>
 
 int main(void) {
 	printw("this is a work in progress, baka");
