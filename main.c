@@ -1,7 +1,39 @@
-#include <ncurses/ncurses.h>
+#include <X11/Xlib.h>
+#include <stdio.h>
+#include <err.h>
 
-int main(void) {
-	printw("this is a work in progress, baka");
-	printw("ncurses lowk sucks but, i need it, its n-not like i want to use it or anything like that....");
-	printw("what am i, the great kobkobkobkobkob, doing with my life. talking to myself like a tsundere. ok ill go for a run");
+
+static Display* dpy;
+static int scr;
+static Window root;
+
+#define POSY   500
+#define POSX   500
+#define WIDTH  500
+#define HEIGHT 500
+#define BORDER 15
+
+int main () {
+
+	Window win;
+	XEvent ev;
+
+	if ((dpy == XOpenDisplay(NULL)) == NULL)
+		err(1, "Can't open display");
+
+	scr = DefaultScreen(dpy);
+	root = RootWindow(dpy, scr);
+	
+	win = XCreateSimpleWindow(dpy, root, POSX, POSY, WIDTH, HEIGHT, BORDER, BlackPixel(dpy, scr), WhitePixel(dpy, scr));
+	XMapWindow(dpy, win);
+	
+	while (XNextEvent(dpy, &ev) == 0) {
+
+	}
+
+	XUnmapWindow(dpy, win);
+	XDestroyWindow(dpy, win);
+	XCloseDisplay(dpy);
+
+	return 0;
 }
