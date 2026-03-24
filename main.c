@@ -19,9 +19,21 @@ int main () {
 			0x0011111b,
 			0x001e1e2e);
 
+	XSelectInput(display, window, KeyPressMask);
 	XMapWindow(display, window);
 	XSync(display, False);
-	sleep(4);
+
+	int q = 0;
+	while (!q) {
+		XEvent event = {0};
+		XNextEvent(display, &event);
+		switch (event.type) {
+			case KeyPress: {
+			   printf("w keypress\n");
+			} break;
+		}
+	}
+
 	XCloseDisplay(display);
 
 	return 0;
