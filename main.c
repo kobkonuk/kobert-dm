@@ -42,7 +42,7 @@ int main (void) {
 			case ClientMessage: {
 				if ((Atom) event.xclient.data.l[0] == wm_delete_window) {
 					printf("WM_SAVE_YOUSELF\n");
-					q = 1
+					q = 1;
 				} 
 			} break;
 		}
